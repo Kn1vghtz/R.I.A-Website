@@ -1,0 +1,1665 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>R.I.A — Roblox Integrity Association</title>
+    <style>
+      :root {
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+        --bg: #0b0b0d;
+        --card: #17171b;
+        --card2: #1e1e24;
+        --bd: #2a2a31;
+        --red: #c4182d;
+        --red2: #ff3b52;
+        --tx: #fff;
+        --mut: #a3a3ad;
+        --ok: #3fb27f;
+        --amb: #d9a441;
+      }
+      html {
+        scroll-padding-top: env(safe-area-inset-top, 0px);
+        scroll-behavior: smooth;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--tx);
+        font:
+          15px/1.55 system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        background-image: radial-gradient(circle at 1px 1px, #ffffff08 1px, transparent 0);
+        background-size: 22px 22px;
+      }
+      a {
+        color: var(--red2);
+        text-decoration: none;
+      }
+      h1,
+      h2,
+      h3 {
+        margin: 0 0 0.4em;
+        line-height: 1.2;
+      }
+      p {
+        color: var(--mut);
+        margin: 0.3em 0;
+      }
+      nav {
+        position: sticky;
+        top: env(safe-area-inset-top, 0px);
+        z-index: 20;
+        background: #0b0b0dee;
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--bd);
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 10px 18px;
+      }
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 700;
+        font-size: 18px;
+        color: #fff;
+      }
+      .logo svg {
+        filter: drop-shadow(0 0 6px #c4182d99);
+      }
+      .links {
+        display: flex;
+        gap: 4px;
+        margin: 0 auto;
+      }
+      .links a {
+        color: var(--mut);
+        padding: 8px 12px;
+        border-bottom: 2px solid transparent;
+        transition: 0.2s;
+      }
+      .links a:hover {
+        color: #fff;
+      }
+      .links a.on {
+        color: #fff;
+        border-color: var(--red);
+      }
+      .right {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .right input {
+        background: var(--card);
+        border: 1px solid var(--bd);
+        color: #fff;
+        border-radius: 10px;
+        padding: 7px 10px;
+        width: 150px;
+      }
+      .dot {
+        position: relative;
+        width: 10px;
+        height: 10px;
+        background: var(--red2);
+        border-radius: 50%;
+        box-shadow: 0 0 8px var(--red2);
+      }
+      .btn {
+        background: var(--red);
+        color: #fff;
+        border: 1px solid var(--red);
+        border-radius: 10px;
+        padding: 9px 16px;
+        font: inherit;
+        cursor: pointer;
+        transition: 0.2s;
+        display: inline-block;
+      }
+      .btn:hover {
+        background: var(--red2);
+        box-shadow: 0 0 14px #c4182d88;
+        transform: translateY(-1px);
+      }
+      .btn.g {
+        background: transparent;
+        border-color: var(--bd);
+        color: #fff;
+      }
+      .btn.g:hover {
+        border-color: var(--red);
+        box-shadow: none;
+      }
+      .btn.s {
+        padding: 5px 10px;
+        font-size: 13px;
+      }
+      #burger {
+        display: none;
+        background: none;
+        border: 0;
+        color: #fff;
+        font-size: 24px;
+        cursor: pointer;
+      }
+      main {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 22px 16px 60px;
+        animation: fade 0.35s;
+      }
+      @keyframes fade {
+        from {
+          opacity: 0;
+          transform: translateY(8px);
+        }
+      }
+      .hero {
+        text-align: center;
+        padding: 56px 12px;
+        border: 1px solid var(--bd);
+        border-radius: 20px;
+        background: radial-gradient(ellipse at 50% 0, #c4182d44, transparent 60%), var(--card);
+      }
+      .hero h1 {
+        font-size: clamp(28px, 6vw, 48px);
+      }
+      .hero .btns {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-top: 18px;
+      }
+      .grid {
+        display: grid;
+        gap: 14px;
+      }
+      .g4 {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      }
+      .g2 {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--bd);
+        border-radius: 16px;
+        padding: 18px;
+        transition: 0.2s;
+      }
+      .card:hover {
+        border-color: #c4182d88;
+        transform: translateY(-2px);
+      }
+      .stat .n {
+        font-size: 34px;
+        font-weight: 700;
+        color: var(--red2);
+      }
+      .sec {
+        margin: 34px 0 14px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+      .sec h2 {
+        border-left: 3px solid var(--red);
+        padding-left: 10px;
+        margin: 0;
+      }
+      .badge {
+        display: inline-block;
+        padding: 2px 10px;
+        border-radius: 99px;
+        font-size: 12px;
+        border: 1px solid;
+      }
+      .b-verified {
+        color: #ff6b7c;
+        border-color: #c4182d;
+        background: #c4182d22;
+      }
+      .b-investigating {
+        color: var(--amb);
+        border-color: #d9a44166;
+        background: #d9a44115;
+      }
+      .b-unverified {
+        color: var(--mut);
+        border-color: var(--bd);
+        background: #ffffff08;
+      }
+      .b-resolved {
+        color: var(--ok);
+        border-color: #3fb27f66;
+        background: #3fb27f15;
+      }
+      .tag {
+        font-size: 12px;
+        color: var(--red2);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+      .tw {
+        overflow-x: auto;
+        border: 1px solid var(--bd);
+        border-radius: 14px;
+        background: var(--card);
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 640px;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 11px 14px;
+        border-bottom: 1px solid var(--bd);
+      }
+      th {
+        color: var(--mut);
+        font-weight: 500;
+        font-size: 13px;
+        cursor: default;
+      }
+      tr:last-child td {
+        border: 0;
+      }
+      tbody tr:hover {
+        background: var(--card2);
+      }
+      .bar {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+      }
+      input,
+      select,
+      textarea {
+        background: var(--card);
+        border: 1px solid var(--bd);
+        color: #fff;
+        border-radius: 10px;
+        padding: 9px 11px;
+        font: inherit;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus {
+        outline: 0;
+        border-color: var(--red);
+      }
+      .bar input {
+        flex: 1;
+        min-width: 180px;
+      }
+      .warn {
+        border: 1px solid #d9a44166;
+        background: #d9a44112;
+        color: #e8c37a;
+        border-radius: 12px;
+        padding: 10px 14px;
+        margin: 12px 0;
+        font-size: 14px;
+      }
+      .demo {
+        border-color: var(--bd);
+        color: var(--mut);
+      }
+      .empty {
+        text-align: center;
+        color: var(--mut);
+        padding: 36px;
+      }
+      .sk {
+        height: 60px;
+        border-radius: 12px;
+        background: linear-gradient(90deg, var(--card), var(--card2), var(--card));
+        background-size: 200% 100%;
+        animation: sh 1.2s infinite;
+        margin: 8px 0;
+      }
+      @keyframes sh {
+        to {
+          background-position: -200% 0;
+        }
+      }
+      .pg {
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+        margin-top: 14px;
+        align-items: center;
+      }
+      form.f {
+        display: grid;
+        gap: 10px;
+      }
+      form.f label {
+        font-size: 13px;
+        color: var(--mut);
+        display: grid;
+        gap: 4px;
+      }
+      .chart {
+        display: flex;
+        align-items: flex-end;
+        gap: 6px;
+        height: 150px;
+        padding-top: 10px;
+      }
+      .chart div {
+        flex: 1;
+        background: linear-gradient(var(--red2), var(--red));
+        border-radius: 6px 6px 0 0;
+        min-height: 2px;
+        position: relative;
+      }
+      .chart div span {
+        position: absolute;
+        top: -18px;
+        width: 100%;
+        text-align: center;
+        font-size: 11px;
+        color: var(--mut);
+      }
+      .hb {
+        display: grid;
+        grid-template-columns: 130px 1fr 30px;
+        gap: 8px;
+        align-items: center;
+        margin: 7px 0;
+        font-size: 13px;
+      }
+      .hb i {
+        display: block;
+        height: 10px;
+        border-radius: 6px;
+        background: var(--red);
+      }
+      footer {
+        border-top: 1px solid var(--bd);
+        padding: 26px 18px;
+        text-align: center;
+        color: var(--mut);
+        font-size: 13px;
+      }
+      footer a {
+        margin: 0 8px;
+        color: var(--mut);
+      }
+      #top {
+        position: fixed;
+        right: 16px;
+        bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+        display: none;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        padding: 0;
+      }
+      #toast {
+        position: fixed;
+        left: 50%;
+        bottom: 24px;
+        transform: translateX(-50%);
+        background: var(--card2);
+        border: 1px solid var(--red);
+        padding: 10px 16px;
+        border-radius: 10px;
+        display: none;
+        z-index: 50;
+      }
+      .kv {
+        display: grid;
+        grid-template-columns: 140px 1fr;
+        gap: 8px;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--bd);
+      }
+      .kv b {
+        color: var(--mut);
+        font-weight: 500;
+      }
+      @media (max-width: 820px) {
+        #burger {
+          display: block;
+          order: 3;
+        }
+        .links {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          flex-direction: column;
+          background: #0b0b0d;
+          border-bottom: 1px solid var(--bd);
+          padding: 8px 16px;
+        }
+        .links.open {
+          display: flex;
+        }
+        .right input {
+          display: none;
+        }
+        .right {
+          margin-left: auto;
+        }
+        .kv {
+          grid-template-columns: 1fr;
+        }
+        .hb {
+          grid-template-columns: 100px 1fr 26px;
+        }
+        table.rs {
+          min-width: 0;
+        }
+        table.rs thead {
+          display: none;
+        }
+        table.rs tr {
+          display: block;
+          padding: 10px 12px;
+          border-bottom: 1px solid var(--bd);
+        }
+        table.rs td {
+          display: flex;
+          justify-content: space-between;
+          gap: 10px;
+          border: 0;
+          padding: 3px 0;
+        }
+        table.rs td:before {
+          content: attr(data-l);
+          color: var(--mut);
+        }
+      }
+
+      /* ---- icons + extra animation ---- */
+      .links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+      }
+      .ni {
+        width: 16px;
+        height: 16px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        transition:
+          transform 0.3s cubic-bezier(0.3, 1.6, 0.5, 1),
+          color 0.2s;
+      }
+      .links a:hover .ni {
+        transform: translateY(-2px) scale(1.2) rotate(-6deg);
+        color: var(--red2);
+      }
+      .links a.on .ni {
+        color: var(--red2);
+      }
+      nav {
+        animation: navin 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+      }
+      @keyframes navin {
+        from {
+          transform: translateY(-100%);
+          opacity: 0;
+        }
+      }
+      .logo svg {
+        animation: float 3.6s ease-in-out infinite;
+      }
+      @keyframes float {
+        50% {
+          transform: translateY(-3px);
+        }
+      }
+      body {
+        animation: drift 70s linear infinite;
+      }
+      @keyframes drift {
+        to {
+          background-position: 220px 220px;
+        }
+      }
+      .hero h1 span {
+        background: linear-gradient(90deg, var(--red2), #fff, var(--red2));
+        background-size: 220% auto;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent !important;
+        animation: shine 4.5s linear infinite;
+      }
+      @keyframes shine {
+        to {
+          background-position: 220% center;
+        }
+      }
+      .btn {
+        position: relative;
+        overflow: hidden;
+      }
+      .btn::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -120%;
+        width: 55%;
+        height: 100%;
+        background: linear-gradient(120deg, transparent, #ffffff45, transparent);
+        transform: skewX(-20deg);
+        transition: left 0.7s;
+      }
+      .btn:hover::after {
+        left: 150%;
+      }
+      .btn.discord {
+        background: #5865f2;
+        border-color: #5865f2;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        animation: float 3.2s ease-in-out infinite;
+      }
+      .btn.discord:hover {
+        background: #6b77ff;
+        box-shadow: 0 0 22px #5865f299;
+      }
+      .btn.discord .ni {
+        fill: currentColor;
+        stroke: none;
+        width: 18px;
+        height: 18px;
+      }
+      .stat > div:first-child {
+        display: inline-block;
+        animation: float 4s ease-in-out infinite;
+      }
+      #bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 2px;
+        width: 0;
+        background: var(--red2);
+        box-shadow: 0 0 10px var(--red2);
+        z-index: 60;
+        pointer-events: none;
+      }
+      #bar.go {
+        animation: bar 0.8s ease-out;
+      }
+      @keyframes bar {
+        0% {
+          width: 0;
+          opacity: 1;
+        }
+        75% {
+          width: 100%;
+          opacity: 1;
+        }
+        100% {
+          width: 100%;
+          opacity: 0;
+        }
+      }
+      .sec h2 {
+        animation: bar2 0.6s ease-out both;
+      }
+      @keyframes bar2 {
+        from {
+          border-left-width: 0;
+          padding-left: 0;
+        }
+      }
+      footer {
+        animation: rise 0.8s both;
+      }
+      /* ---- smooth + animated ---- */
+      .av {
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        object-fit: cover;
+        vertical-align: middle;
+        margin-right: 8px;
+        border: 1px solid var(--bd);
+        background: var(--card2);
+      }
+      .av.mid {
+        width: 44px;
+        height: 44px;
+      }
+      .av.big {
+        width: 76px;
+        height: 76px;
+        display: block;
+        margin: 0 auto 10px;
+        border: 2px solid var(--red);
+        box-shadow: 0 0 14px #c4182d55;
+      }
+      .staff {
+        text-align: center;
+      }
+      .avw {
+        position: relative;
+        width: 76px;
+        margin: 0 auto 10px;
+      }
+      .avw .av.big {
+        margin: 0;
+      }
+      .sd {
+        position: absolute;
+        right: 0;
+        bottom: 2px;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        border: 4px solid var(--card);
+      }
+      .sd.online {
+        animation: pulse 2.4s infinite;
+      }
+      .sd.inl {
+        position: static;
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border: 0;
+        vertical-align: middle;
+      }
+      .rolepill {
+        display: inline-block;
+        padding: 2px 12px;
+        border-radius: 99px;
+        background: #c4182d22;
+        border: 1px solid #c4182d88;
+        color: #ff6b7c;
+        font-size: 12px;
+      }
+      .sl {
+        font-size: 13px;
+        margin: 8px 0 0;
+      }
+      .stx {
+        font-size: 12px;
+        color: var(--mut);
+        margin: 2px 0 0;
+      }
+      .pcard {
+        text-align: center;
+        overflow: hidden;
+        padding-top: 0;
+      }
+      .pbanner {
+        height: 96px;
+        margin: 0 -18px;
+        background: linear-gradient(135deg, #c4182d66, #0b0b0d) center / cover;
+      }
+      .av.pf {
+        margin: -40px auto 10px;
+        position: relative;
+        border: 4px solid var(--card);
+      }
+      .who {
+        display: inline-flex;
+        align-items: center;
+      }
+      body {
+        transition: background 0.4s;
+      }
+      main.pg-in {
+        animation: fade 0.45s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .grid > *,
+      .tw tbody tr,
+      .hero,
+      .stat,
+      .bar,
+      .warn {
+        animation: rise 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+      }
+      .grid > *:nth-child(2),
+      .tw tbody tr:nth-child(2) {
+        animation-delay: 0.06s;
+      }
+      .grid > *:nth-child(3),
+      .tw tbody tr:nth-child(3) {
+        animation-delay: 0.12s;
+      }
+      .grid > *:nth-child(4),
+      .tw tbody tr:nth-child(4) {
+        animation-delay: 0.18s;
+      }
+      .tw tbody tr:nth-child(n + 5) {
+        animation-delay: 0.24s;
+      }
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      .hero {
+        position: relative;
+        overflow: hidden;
+      }
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: -40%;
+        background: radial-gradient(circle at 50% 30%, #c4182d33, transparent 55%);
+        animation: glow 7s ease-in-out infinite alternate;
+        pointer-events: none;
+      }
+      .hero > * {
+        position: relative;
+      }
+      @keyframes glow {
+        to {
+          transform: translateY(8%) scale(1.15);
+          opacity: 0.55;
+        }
+      }
+      .links a {
+        position: relative;
+        border-bottom: 0 !important;
+      }
+      .links a::after {
+        content: "";
+        position: absolute;
+        left: 12px;
+        right: 12px;
+        bottom: 0;
+        height: 2px;
+        background: var(--red);
+        transform: scaleX(0);
+        transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+      .links a:hover::after,
+      .links a.on::after {
+        transform: scaleX(1);
+      }
+      .btn {
+        transition:
+          transform 0.2s,
+          box-shadow 0.25s,
+          background 0.2s,
+          border-color 0.2s;
+      }
+      .btn:active {
+        transform: scale(0.96);
+      }
+      .card {
+        transition:
+          transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1),
+          border-color 0.25s,
+          box-shadow 0.25s;
+      }
+      .card:hover {
+        box-shadow: 0 8px 28px #c4182d22;
+      }
+      tbody tr {
+        transition:
+          background 0.2s,
+          transform 0.2s;
+      }
+      tbody tr:hover {
+        transform: translateX(3px);
+      }
+      .dot {
+        animation: pulse 2s infinite;
+      }
+      @keyframes pulse {
+        50% {
+          box-shadow:
+            0 0 0 6px #ff3b5200,
+            0 0 10px var(--red2);
+        }
+        0%,
+        100% {
+          box-shadow:
+            0 0 0 0 #ff3b5266,
+            0 0 8px var(--red2);
+        }
+      }
+      #top {
+        transition:
+          opacity 0.3s,
+          transform 0.3s;
+      }
+      #toast {
+        animation: rise 0.3s both;
+      }
+      main.again,
+      main.again * {
+        animation: none !important;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition: none !important;
+        }
+        html {
+          scroll-behavior: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a class="logo" href="#/" id="brand"></a>
+      <div class="links" id="links"></div>
+      <div class="right">
+        <span class="dot" title="New alerts"></span
+        ><a class="btn g s" id="dl" href="/auth/login" style="display: none">Login with Discord</a
+        ><a class="btn s" id="adminBtn" href="#/admin" style="display: none">Admin</a>
+      </div>
+      <button id="burger" aria-label="Menu">☰</button>
+    </nav>
+    <div id="bar"></div>
+    <main id="app"></main>
+    <footer>
+      <div class="logo" style="justify-content: center; margin-bottom: 8px" id="fbrand"></div>
+      <div id="flinks"></div>
+      <p>
+        Appeals: <a href="${DISCORD_TICKET_URL}" style="margin: 0" id="fd">Appeal server</a> · ©
+        <span id="yr"></span> <span class="bn"></span>.
+      </p>
+    </footer>
+    <button class="btn" id="top" aria-label="Back to top">↑</button>
+    <div id="toast"></div>
+    <script>
+      const APPEAL_INVITE = "https://discord.gg/HxEM4AUN7C"; // appeal server invite
+      const APPEAL_GUILD_ID = "1343622851361505455"; // appeal server ID
+      const MAIN_GUILD_ID = "1270633085855334454"; // main server ID
+      const MAIN_INVITE = "https://discord.gg/q7X4YCgXx7"; // main server invite
+      const DISCORD_TICKET_URL = APPEAL_INVITE;
+      const ICONS = {
+        home: '<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+        updates:
+          '<path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/>',
+        logs: '<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/>',
+        stats: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+        staff:
+          '<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/>',
+        about: '<circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/>',
+        lock: '<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>',
+      };
+      const ico = (k) =>
+        `<svg class="ni" viewBox="0 0 24 24">${ICONS[k === "" ? "home" : k] || ""}</svg>`;
+      const DCICON =
+        '<svg class="ni" viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M20.3 4.4A19 19 0 0 0 15.6 3l-.2.4a17 17 0 0 1 4.1 1.9 15.8 15.8 0 0 0-15 0A17 17 0 0 1 8.6 3.4L8.4 3a19 19 0 0 0-4.7 1.4C.7 8.9-.1 13.2.3 17.4A19 19 0 0 0 6 20.3l1.2-2a12 12 0 0 1-1.9-.9l.5-.4a13.6 13.6 0 0 0 12.4 0l.5.4c-.6.4-1.2.7-1.9.9l1.2 2a19 19 0 0 0 5.7-2.9c.5-4.9-.8-9.1-3.4-13zM8.7 14.8c-1.1 0-2-1-2-2.3s.9-2.3 2-2.3 2 1 2 2.3-.9 2.3-2 2.3zm6.6 0c-1.1 0-2-1-2-2.3s.9-2.3 2-2.3 2 1 2 2.3-.9 2.3-2 2.3z"/></svg>';
+      const SITE = "R.I.A";
+      const FULLNAME = "Roblox Integrity Association"; // ← change the site name here
+      const TYPES = [
+          "Scamming",
+          "Deceptive Work Claims",
+          "Payment Fraud",
+          "Impersonation",
+          "Other",
+        ],
+        STAT = ["verified"];
+      const SL = {
+        unverified: "Unverified allegation",
+        investigating: "Under Investigation",
+        verified: "Verified",
+        resolved: "Resolved",
+      };
+      const UCATS = ["Server Updates", "Website Updates", "Bot Updates", "Scam Updates"];
+      const $ = (s) => document.querySelector(s),
+        esc = (s) =>
+          String(s ?? "").replace(
+            /[&<>"']/g,
+            (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c],
+          );
+      const shield =
+        '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ff3b52" stroke-width="2"><path d="M12 2l8 3v6c0 5-3.4 9.3-8 11-4.6-1.7-8-6-8-11V5z" fill="#c4182d33"/><path d="M9 12l2 2 4-4"/></svg>';
+      const dAgo = (n) => new Date(Date.now() - n * 864e5).toISOString().slice(0, 10);
+      const DEMO_LOGS = [
+        ["Demo_User1", "Scamming", "verified"],
+        ["Demo_User2", "Payment Fraud", "investigating"],
+        ["Demo_User3", "Impersonation", "unverified"],
+        ["Demo_User4", "Deceptive Work Claims", "verified"],
+        ["Demo_User5", "Other", "resolved"],
+        ["Demo_User6", "Scamming", "unverified"],
+        ["Demo_User7", "Payment Fraud", "investigating"],
+        ["Demo_User8", "Impersonation", "resolved"],
+        ["Demo_User9", "Scamming", "verified"],
+      ].map((r, i) => ({
+        id: "DEMO-" + String(i + 1).padStart(3, "0"),
+        username: r[0],
+        discordId: "",
+        type: r[1],
+        status: "verified",
+        description: "Demo entry for layout only — not a real report.",
+        evidence: "",
+        investigator: "Demo Mod",
+        created: dAgo(i * 9 + 1),
+        updated: dAgo(i * 4),
+        demo: true,
+      }));
+      const DEMO_UPD = [
+        {
+          id: "d1",
+          title: "Welcome to " + SITE + " (demo)",
+          category: "Server Updates",
+          body: "Demo content. Real updates appear here once an admin publishes them.",
+          author: "Demo",
+          date: dAgo(2),
+        },
+        {
+          id: "d2",
+          title: "Scheduled maintenance (demo)",
+          category: "Website Updates",
+          body: "Demo content showing the Maintenance category.",
+          author: "Demo",
+          date: dAgo(6),
+        },
+      ];
+      let S = {
+        logs: [],
+        upd: [],
+        staff: [],
+        pres: {},
+        presOn: false,
+        notes: {},
+        mode: "loading",
+        db: null,
+        user: null,
+        admin: false,
+        uid: null,
+        page: 1,
+        f: { q: "", type: "", st: "", sort: "new" },
+        uf: { q: "", cat: "" },
+        range: 90,
+      };
+      function toast(m) {
+        const t = $("#toast");
+        t.textContent = m;
+        t.style.display = "block";
+        clearTimeout(t._t);
+        t._t = setTimeout(() => (t.style.display = "none"), 2600);
+      }
+      const badge = (s) => `<span class="badge b-${s}">${SL[s] || esc(s)}</span>`;
+      const lab = (l) =>
+        l.status === "verified" || l.status === "resolved"
+          ? ""
+          : '<div class="warn" style="margin:10px 0">⚠ This is an unconfirmed allegation. It has not been verified and must not be treated as fact.</div>';
+      function init() {
+        $("#brand").innerHTML = shield + `<span class="bn">${SITE}</span>`;
+        $("#fbrand").innerHTML = shield + `<span class="bn">${SITE}</span>`;
+        document.querySelectorAll(".bn").forEach((e) => (e.textContent = SITE));
+        $("#yr").textContent = new Date().getFullYear();
+        $("#fd").href = DISCORD_TICKET_URL;
+        const nav = [
+          ["", "Home"],
+          ["updates", "Updates"],
+          ["logs", "Scam Logs"],
+          ["stats", "Statistics"],
+          ["staff", "Staff"],
+          ["about", "About"],
+        ];
+        $("#links").innerHTML = nav
+          .map((n) => `<a href="#/${n[0]}" data-r="${n[0]}">${ico(n[0])}${n[1]}</a>`)
+          .join("");
+        $("#flinks").innerHTML = nav.map((n) => `<a href="#/${n[0]}">${n[1]}</a>`).join("");
+        $("#burger").onclick = () => $("#links").classList.toggle("open");
+        window.onscroll = () => ($("#top").style.display = scrollY > 400 ? "block" : "none");
+        $("#top").onclick = () => scrollTo({ top: 0 });
+        window.onhashchange = render;
+        S.logs = DEMO_LOGS;
+        S.upd = DEMO_UPD;
+        S.mode = "demo";
+        render();
+        connect();
+      }
+      const api = (m, u, b) =>
+        fetch(u, {
+          method: m,
+          headers: { "Content-Type": "application/json", "X-Requested-With": "sw" },
+          body: b ? JSON.stringify(b) : undefined,
+        }).then(async (r) => {
+          if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error || r.status);
+          return r.json();
+        });
+      async function serverInit() {
+        let me = {};
+        try {
+          me = await api("GET", "/api/me");
+        } catch (e) {}
+        S.admin = !!me.admin;
+        S.uid = me.id || null;
+        const dl = $("#dl");
+        dl.style.display = "";
+        if (me.id) {
+          dl.textContent = "Logout (" + me.name + ")";
+          dl.href = "/auth/logout";
+        }
+        $("#adminBtn").style.display = S.admin ? "" : "none";
+        S.rl = {};
+        const loadPres = () =>
+          api("GET", "/api/presence")
+            .then((r) => {
+              S.presOn = !!r.enabled;
+              S.pres = r.map || {};
+              if (route().p === "staff") render();
+            })
+            .catch(() => {});
+        loadPres();
+        setInterval(loadPres, 30000);
+        api("GET", "/api/discord")
+          .then((r) => {
+            S.dc = r;
+            if (route().p === "") render();
+          })
+          .catch(() => {});
+        S.db = {
+          collection: (c) => ({
+            onSnapshot: (next, err) => {
+              const load = () =>
+                api("GET", "/api/" + c).then(
+                  (a) => next({ docs: a.map((d) => ({ id: d.id, data: () => d })) }),
+                  (e) => err && err(e),
+                );
+              S.rl[c] = load;
+              load();
+              return () => {};
+            },
+            doc: (id) => ({
+              set: async (d) => {
+                await api("PUT", "/api/" + c + "/" + encodeURIComponent(id), d);
+                S.rl[c] && S.rl[c]();
+              },
+              delete: async () => {
+                await api("DELETE", "/api/" + c + "/" + encodeURIComponent(id));
+                S.rl[c] && S.rl[c]();
+              },
+            }),
+          }),
+        };
+      }
+      async function connect() {
+        try {
+          if (typeof claude === "undefined") await serverInit();
+          else {
+            S.user = await claude.use("user");
+            S.admin = !!(S.user && S.user.canEdit());
+            $("#adminBtn").style.display = S.admin ? "" : "none";
+            S.db = await claude.use("db");
+            if (S.user && S.user.id)
+              try {
+                S.uid = await S.user.id();
+              } catch (e) {}
+          }
+          if (!S.db) {
+            render();
+            return;
+          }
+          S.mode = "live";
+          S.loaded = {};
+          render();
+          const sub = (c, fn) =>
+            S.db.collection(c).onSnapshot(
+              (sn) => {
+                fn(sn.docs.map((d) => ({ ...d.data(), _k: d.id })));
+                S.loaded[c] = 1;
+                render();
+              },
+              (e) => {
+                S.err = e.message;
+                render();
+              },
+            );
+          sub("logs", (a) => (S.logs = a));
+          sub("updates", (a) => (S.upd = a));
+          if (typeof claude === "undefined") sub("staff", (a) => (S.staff = a));
+          if (S.admin)
+            sub("notes", (a) => {
+              S.notes = {};
+              a.forEach((n) => (S.notes[n._k] = n.text));
+            });
+        } catch (e) {
+          render();
+        }
+      }
+      function route() {
+        const h = location.hash.replace(/^#\/?/, "").split("/");
+        return { p: h[0] || "", id: decodeURIComponent(h[1] || "") };
+      }
+      function render() {
+        const r = route();
+        document
+          .querySelectorAll("#links a")
+          .forEach((a) => a.classList.toggle("on", a.dataset.r === r.p));
+        $("#links").classList.remove("open");
+        const a = $("#app");
+        a.classList.toggle("again", S.lastP === route().p);
+        const banner =
+          S.mode === "demo"
+            ? '<div class="warn demo">Demo data shown for layout only — nothing here is a real or verified report. Live data loads when the site connects to its database.</div>'
+            : "";
+        const loading = S.mode === "live" && !(S.loaded && S.loaded.logs && S.loaded.updates);
+        const P =
+          {
+            "": home,
+            updates,
+            logs: logsPg,
+            log: detail,
+            stats,
+            staff: staffPg,
+            about,
+            admin: adminPg,
+          }[r.p] || home;
+        a.innerHTML =
+          (S.err ? `<div class="warn">Error: ${esc(S.err)}</div>` : "") +
+          banner +
+          (loading && ["", "logs", "stats", "updates", "log"].includes(r.p)
+            ? '<div class="sk"></div><div class="sk"></div><div class="sk"></div>'
+            : P(r));
+        if (!loading) bind(r);
+        a.classList.remove("pg-in");
+        void a.offsetWidth;
+        a.classList.add("pg-in");
+        if (!loading) fillProfiles();
+        if (S.lastP !== r.p) {
+          const pb = $("#bar");
+          pb.classList.remove("go");
+          void pb.offsetWidth;
+          pb.classList.add("go");
+          window.scrollTo({ top: 0, behavior: "smooth" });
+          S.lastP = r.p;
+        }
+        document.querySelectorAll(".stat .n").forEach((el) => {
+          const to = parseInt(el.textContent, 10);
+          if (isNaN(to) || el.dataset.c === String(to)) return;
+          el.dataset.c = to;
+          const t0 = performance.now();
+          const step = (t) => {
+            const p = Math.min(1, (t - t0) / 800);
+            el.textContent = Math.round(to * (1 - Math.pow(1 - p, 3)));
+            if (p < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        });
+      }
+      const counts = () => ({
+        total: S.logs.length,
+        ver: S.logs.filter((l) => l.status === "verified").length,
+        inv: S.logs.filter((l) => l.status === "investigating").length,
+        res: S.logs.filter((l) => l.status === "resolved").length,
+        rec: S.logs.filter((l) => Date.now() - new Date(l.created) < 30 * 864e5).length,
+      });
+      const ID_OK = (i) => /^\d{15,21}$/.test(String(i || ""));
+      const av = (id, c = "") =>
+        ID_OK(id)
+          ? `<img class="av ${c}" data-uid="${id}" alt="" loading="lazy" src="https://cdn.discordapp.com/embed/avatars/${Number((BigInt(id) >> 22n) % 6n)}.png">`
+          : "";
+      const PC = {};
+      const profile = (id) =>
+        PC[id] || (PC[id] = api("GET", "/api/profile/" + id).catch(() => ({})));
+      function fillProfiles() {
+        document.querySelectorAll("[data-uid]").forEach((el) =>
+          profile(el.dataset.uid).then((p) => {
+            if (p && p.avatar) el.src = p.avatar;
+          }),
+        );
+        document.querySelectorAll("[data-uf]").forEach((el) =>
+          profile(el.dataset.ufid).then((p) => {
+            if (p && p[el.dataset.uf]) {
+              el.textContent = p[el.dataset.uf];
+              el.parentElement.style.display = "";
+            }
+          }),
+        );
+        document.querySelectorAll("[data-ub]").forEach((el) =>
+          profile(el.dataset.ub).then((p) => {
+            if (p && p.banner) el.style.backgroundImage = `url(${p.banner})`;
+          }),
+        );
+        document.querySelectorAll("[data-uname]").forEach((el) =>
+          profile(el.dataset.uname).then((p) => {
+            if (p && p.name) el.textContent = el.dataset.pre ? "Discord: " + p.name : p.name;
+          }),
+        );
+      }
+      function staffPg() {
+        const STL = {
+          online: ["Online", "#3fb27f"],
+          idle: ["Idle", "#d9a441"],
+          dnd: ["Do Not Disturb", "#ff3b52"],
+          offline: ["Offline", "#6b6b76"],
+        };
+        const rank = { online: 0, idle: 1, dnd: 2, offline: 3 };
+        const st = (m) => ((S.pres || {})[m.discordId] || {}).status || "offline";
+        const l = [...S.staff].sort(
+          (a, b) =>
+            (a.order ?? 50) - (b.order ?? 50) ||
+            rank[st(a)] - rank[st(b)] ||
+            String(a.name || "").localeCompare(String(b.name || "")),
+        );
+        const on = l.filter((m) => st(m) !== "offline").length;
+        return (
+          `<h1>Meet the Staff Team</h1><p>The people who review reports and keep ${esc(SITE)} running.</p>` +
+          (S.presOn && l.length
+            ? `<p style="margin-top:8px"><span class="sd inl" style="background:#3fb27f"></span> ${on} of ${l.length} online right now</p>`
+            : "") +
+          (l.length
+            ? `<div class="grid g4" style="margin-top:16px">${l
+                .map((m) => {
+                  const k = st(m),
+                    info = STL[k] || STL.offline,
+                    txt = ((S.pres || {})[m.discordId] || {}).text;
+                  return `<div class="card staff"><div class="avw">${av(m.discordId, "big")}${S.presOn ? `<span class="sd ${k}" style="background:${info[1]}" title="${info[0]}"></span>` : ""}</div><h3${m.name ? "" : ` data-uname="${esc(m.discordId)}"`}>${esc(m.name || "Staff")}</h3><span class="rolepill">${esc(m.role)}</span>${S.presOn ? `<p class="sl" style="color:${info[1]}">${info[0]}</p>` : ""}${txt ? `<p class="stx">${esc(txt)}</p>` : ""}</div>`;
+                })
+                .join("")}</div>`
+            : '<div class="card empty" style="margin-top:16px">Staff list coming soon.</div>')
+        );
+      }
+      const pcard = (id) =>
+        ID_OK(id)
+          ? `<div class="card pcard" style="margin-top:12px"><div class="pbanner" data-ub="${id}"></div>${av(id, "big pf")}<h2 data-uname="${id}">Discord user</h2><p class="uline" style="display:none">@<span data-uf="username" data-ufid="${id}"></span></p><p style="font-size:13px">Discord ID: ${id} · Account created ${new Date(Number((BigInt(id) >> 22n) + 1420070400000n)).toLocaleDateString()}</p></div>`
+          : "";
+      const MAIN_LINK = () =>
+        MAIN_INVITE ||
+        (S.dc && S.dc.main && S.dc.main.invite) ||
+        "https://discord.com/channels/" + MAIN_GUILD_ID;
+      const sorted = () => [...S.logs].sort((a, b) => String(b.created).localeCompare(a.created));
+      function rows(list) {
+        return list.length
+          ? `<div class="tw"><table class="rs"><thead><tr><th>ID</th><th>User</th><th>Discord ID</th><th>Date</th><th>Status</th><th></th></tr></thead><tbody>${list.map((l) => `<tr><td data-l="ID">${esc(l.id)}</td><td data-l="User"><span class="who">${av(l.discordId)}${esc(l.username)}</span></td><td data-l="Discord ID">${esc(l.discordId || "—")}</td><td data-l="Date">${esc(l.created)}</td><td data-l="Status">${badge(l.status)}</td><td><a href="#/log/${encodeURIComponent(l.id)}">View Details</a></td></tr>`).join("")}</tbody></table></div>`
+          : '<div class="card empty">No scam logs found.</div>';
+      }
+      function updCards(list) {
+        return list.length
+          ? `<div class="grid g2">${list.map((u) => `<div class="card"><span class="tag">${esc(u.category)}</span><h3>${esc(u.title)}</h3><p>${esc(u.body.slice(0, 110))}${u.body.length > 110 ? "…" : ""}</p><p style="font-size:12px">${esc(u.date)} · ${esc(u.author || "Staff")}</p><a href="#/updates/${encodeURIComponent(u.id || u._k)}">Read More →</a></div>`).join("")}</div>`
+          : '<div class="card empty">No updates available yet.</div>';
+      }
+      function home() {
+        const c = counts();
+        return `<section class="hero"><h1>Stay Informed. <span style="color:var(--red2)">Stay Protected.</span></h1><p style="max-width:600px;margin:auto">${esc(SITE)} (${esc(FULLNAME)}) is the community's scam log for our Discord server. We record reported scams, review the evidence, and keep members informed so everyone can trade and work safely.</p><div class="btns"><a class="btn" href="#/logs">View Scam Logs</a><a class="btn g" href="#/about">How it works</a></div><div style="margin-top:14px"><a class="btn discord" target="_blank" rel="noopener noreferrer" href="${MAIN_LINK()}">${DCICON} Join our Discord${S.dc && S.dc.main && S.dc.main.online ? " · " + S.dc.main.online + " online" : ""}</a></div></section>
+ <div class="card stat" style="margin:18px auto 0;max-width:340px;text-align:center"><div class="n" style="font-size:52px">${c.total}</div><b>Cases Logged</b><p>Total scam cases recorded for this server</p></div>`;
+      }
+      const sortU = () => [...S.upd].sort((a, b) => String(b.date).localeCompare(a.date));
+      function updates(r) {
+        if (r.id) {
+          const u = S.upd.find((x) => (x.id || x._k) === r.id);
+          return u
+            ? `<a href="#/updates">← Back</a><div class="card" style="margin-top:12px"><span class="tag">${esc(u.category)}</span><h1>${esc(u.title)}</h1><p>${esc(u.date)} · ${esc(u.author || "Staff")}</p><p style="color:#ddd;white-space:pre-wrap;margin-top:14px">${esc(u.body)}</p></div>`
+            : '<div class="card empty">Update not found.</div>';
+        }
+        const q = S.uf.q.toLowerCase(),
+          l = sortU().filter(
+            (u) =>
+              (!S.uf.cat || u.category === S.uf.cat) &&
+              (u.title + u.body).toLowerCase().includes(q),
+          );
+        return `<h1>Updates</h1><div class="bar"><input id="uq" placeholder="Search updates…" value="${esc(S.uf.q)}"><select id="uc"><option value="">All categories</option>${UCATS.map((c) => `<option ${S.uf.cat === c ? "selected" : ""}>${c}</option>`).join("")}</select></div>${updCards(l)}`;
+      }
+      function logsPg() {
+        const f = S.f,
+          q = f.q.toLowerCase();
+        let l = S.logs.filter(
+          (x) =>
+            (!f.st || x.status === f.st) &&
+            (!q ||
+              [x.username].some((v) =>
+                String(v || "")
+                  .toLowerCase()
+                  .includes(q),
+              )),
+        );
+        const cmp = {
+          new: (a, b) => b.created.localeCompare(a.created),
+          old: (a, b) => a.created.localeCompare(b.created),
+          upd: (a, b) => b.updated.localeCompare(a.updated),
+          user: (a, b) => a.username.localeCompare(b.username),
+        }[f.sort];
+        l.sort(cmp);
+        const per = 8,
+          pages = Math.max(1, Math.ceil(l.length / per));
+        S.page = Math.min(S.page, pages);
+        return `<h1>Scam Logs</h1><div class="warn demo">Only cases verified by staff are published here.</div>
+ <div class="bar"><input id="q" placeholder="Search by username" value="${esc(f.q)}"><select id="so">${[
+   ["new", "Newest"],
+   ["old", "Oldest"],
+   ["upd", "Recently updated"],
+   ["user", "Username A–Z"],
+ ]
+   .map((o) => `<option value="${o[0]}" ${f.sort === o[0] ? "selected" : ""}>${o[1]}</option>`)
+   .join("")}</select></div>
+ ${rows(l.slice((S.page - 1) * per, S.page * per))}<div class="pg"><button class="btn g s" id="pp" ${S.page <= 1 ? "disabled" : ""}>‹ Prev</button><span>Page ${S.page} / ${pages}</span><button class="btn g s" id="pn" ${S.page >= pages ? "disabled" : ""}>Next ›</button></div>`;
+      }
+      function detail(r) {
+        const l = S.logs.find((x) => x.id === r.id);
+        if (!l)
+          return '<div class="card empty">Log not found. <a href="#/logs">Back to logs</a></div>';
+        const kv = (k, v) => `<div class="kv"><b>${k}</b><span>${v}</span></div>`;
+        return `<a href="#/logs">← All logs</a>${pcard(l.discordId)}<div class="card" style="margin-top:12px"><h1>${esc(l.id)} ${badge(l.status)}</h1>${lab(l)}${kv("Username", '<span class="who">' + av(l.discordId, "mid") + esc(l.username) + "</span>" + (l.discordId ? ' <small data-pre="1" data-uname="' + esc(l.discordId) + '"></small>' : ""))}${kv("Discord ID", esc(l.discordId || "—"))}${kv("Reason", esc(l.description))}${kv(
+          "Evidence",
+          l.evidence
+            ? l.evidence
+                .split(/\s+/)
+                .filter((u) => /^https?:\/\//.test(u))
+                .map(
+                  (u) =>
+                    `<a href="${esc(u)}" rel="noopener noreferrer nofollow" target="_blank">${esc(u)}</a>`,
+                )
+                .join("<br>") || esc(l.evidence)
+            : "None published",
+        )}${kv("Reported", esc(l.created))}${kv("Last updated", esc(l.updated))}${kv("Investigator", esc(l.investigator || "—"))}
+ <p style="margin-top:14px">Think this report is inaccurate? <a href="${DISCORD_TICKET_URL}" target="_blank" rel="noopener noreferrer">Join the appeal server</a> and open a ticket quoting ${esc(l.id)}.</p></div>`;
+      }
+      function inRange() {
+        const c = S.range ? Date.now() - S.range * 864e5 : 0;
+        return S.logs.filter((l) => new Date(l.created) >= c);
+      }
+      function stats() {
+        const L = inRange(),
+          n = (s) => L.filter((l) => l.status === s).length,
+          b = [];
+        const wk = [...Array(8)]
+          .map((_, i) => {
+            const e = Date.now() - i * 7 * 864e5,
+              s = e - 7 * 864e5;
+            return L.filter((l) => {
+              const t = +new Date(l.created);
+              return t > s && t <= e;
+            }).length;
+          })
+          .reverse();
+        const mx = Math.max(1, ...wk),
+          tc = TYPES.map((t) => [t, L.filter((l) => l.type === t).length]),
+          tm = Math.max(1, ...tc.map((x) => x[1]));
+        const mo = {};
+        L.forEach((l) => {
+          const k = String(l.created).slice(0, 7);
+          mo[k] = (mo[k] || 0) + 1;
+        });
+        const mk = Object.keys(mo).sort().slice(-6),
+          mm = Math.max(1, ...mk.map((k) => mo[k]));
+        return `<div class="sec" style="margin-top:0"><h1>Statistics</h1><select id="rg">${[
+          [7, "Last 7 days"],
+          [30, "Last 30 days"],
+          [90, "Last 90 days"],
+          [365, "Last year"],
+          [0, "All time"],
+        ]
+          .map(
+            (o) => `<option value="${o[0]}" ${S.range === o[0] ? "selected" : ""}>${o[1]}</option>`,
+          )
+          .join("")}</select></div>
+ <div class="grid g4">${[["Verified cases", L.length]].map((s) => `<div class="card stat"><div class="n">${s[1]}</div><b>${s[0]}</b></div>`).join("")}</div>
+ <div class="grid g2" style="margin-top:14px"><div class="card"><h3>Weekly reports (last 8 weeks)</h3><div class="chart">${wk.map((v) => `<div style="height:${(v / mx) * 100}%"><span>${v}</span></div>`).join("")}</div></div>
+ <div class="card"><h3>Monthly trend</h3>${mk.length ? `<div class="chart">${mk.map((k) => `<div style="height:${(mo[k] / mm) * 100}%"><span>${mo[k]}</span></div>`).join("")}</div><p style="display:flex;justify-content:space-around;font-size:11px">${mk.map((k) => `<span>${k.slice(2)}</span>`).join("")}</p>` : '<div class="empty">No data in range.</div>'}</div></div>`;
+      }
+      function about() {
+        return `<h1>About ${esc(SITE)}</h1><p>${esc(FULLNAME)}</p><div class="grid g2">
+ <div class="card"><h3>Our mission</h3><p>Help the community recognise and avoid scams by keeping a transparent, fairly reviewed record of reported incidents.</p></div>
+ <div class="card"><h3>Reporting & verification</h3><p>Reports are reviewed privately by moderators. Only cases whose evidence has been verified are published.</p></div>
+ <div class="card"><h3>Community guidelines</h3><p>Only submit truthful reports. Never post passwords, payment details or private data. No harassment or doxxing.</p></div>
+ <div class="card"><h3>Appeals & corrections</h3><p>Think a log is inaccurate? Join our appeal server and open a ticket with the Log ID and your evidence. A moderator will review it.</p><a class="btn" style="margin-top:10px" href="${DISCORD_TICKET_URL}" target="_blank" rel="noopener noreferrer">Join the appeal server</a></div></div>
+ <div class="warn" style="margin-top:14px"><b>Disclaimer:</b> Only verified findings are published. If you believe an entry is wrong, open a Discord ticket.</div>`;
+      }
+      function adminPg(r) {
+        if (S.mode === "demo" || !S.db)
+          return '<div class="card empty">The admin dashboard needs a signed-in claude.ai session with the database enabled.</div>';
+        if (!S.admin)
+          return '<div class="card empty"><h3>Admin access required</h3>Only artifact owners/editors can manage records. Admin accounts and roles are managed through this artifact\'s sharing permissions.</div>';
+        const e = (S.edit && S.logs.find((l) => l.id === S.edit)) || {},
+          u = (S.editU && S.upd.find((x) => x._k === S.editU)) || {};
+        const o = (a, v) =>
+          a.map((x) => `<option ${x === v ? "selected" : ""}>${x}</option>`).join("");
+        return `<h1>Admin Dashboard</h1><p>${counts().total} logs · ${S.upd.length} updates. Changes record who created/modified each item.</p>
+ <div class="grid g2" style="margin-top:14px"><div class="card"><h3>${e.id ? "Edit log " + esc(e.id) : "New scam log"}</h3><form class="f" id="lf"><label>Username<input name="username" maxlength="60" required value="${esc(e.username)}"></label><label>Discord User ID<input name="discordId" pattern="\\d{15,21}|" title="17–20 digit ID" value="${esc(e.discordId)}"></label><label>Reason<textarea name="description" rows="3" maxlength="2000" required>${esc(e.description)}</textarea></label><label>Evidence links (space separated, https only)<input name="evidence" maxlength="500" value="${esc(e.evidence)}"></label><label>Investigator<input name="investigator" maxlength="60" value="${esc(e.investigator)}"></label><label>Private notes (admins only)<textarea name="notes" rows="2" maxlength="2000">${esc(S.notes[e.id])}</textarea></label><button class="btn">${e.id ? "Save changes" : "Create log"}</button>${e.id ? '<button type="button" class="btn g" id="lc">Cancel</button>' : ""}</form></div>
+ <div class="card"><h3>${u.id ? "Edit update" : "Publish update"}</h3><form class="f" id="uf"><label>Title<input name="title" maxlength="120" required value="${esc(u.title)}"></label><label>Category<select name="category">${o(UCATS, u.category)}</select></label><label>Body<textarea name="body" rows="5" maxlength="4000" required>${esc(u.body)}</textarea></label><button class="btn">${u.id ? "Save" : "Publish"}</button>${u.id ? '<button type="button" class="btn g" id="uc2">Cancel</button>' : ""}</form></div></div>
+ <div class="sec"><h2>Manage logs</h2></div>${
+   S.logs.length
+     ? `<div class="tw"><table><tbody>${sorted()
+         .map(
+           (l) =>
+             `<tr><td>${esc(l.id)}</td><td>${esc(l.username)}</td><td>${badge(l.status)}</td><td><small>by ${esc(String(l.modifiedBy || l.createdBy || "—").slice(0, 8))}</small></td><td><button class="btn g s" data-e="${esc(l.id)}">Edit</button> <button class="btn g s" data-d="${esc(l.id)}">Delete</button></td></tr>`,
+         )
+         .join("")}</tbody></table></div>`
+     : '<div class="card empty">No logs yet. Create the first one above.</div>'
+ }
+ <div class="sec"><h2>Manage updates</h2></div>${
+   S.upd.length
+     ? `<div class="tw"><table><tbody>${sortU()
+         .map(
+           (x) =>
+             `<tr><td>${esc(x.title)}</td><td>${esc(x.category)}</td><td><button class="btn g s" data-eu="${esc(x._k)}">Edit</button> <button class="btn g s" data-du="${esc(x._k)}">Delete</button></td></tr>`,
+         )
+         .join("")}</tbody></table></div>`
+     : '<div class="card empty">No updates yet.</div>'
+ }
+ <div class="sec"><h2>Staff team</h2></div><div class="card"><form class="f" id="sf"><label>Discord User ID<input name="discordId" pattern="\\d{15,21}" title="17-20 digit ID" required></label><label>Display name (optional — uses Discord name if empty)<input name="name" maxlength="40"></label><label>Role<input name="role" maxlength="40" required placeholder="Moderator"></label><label>Order on page (lower shows first)<input name="order" type="number" min="0" max="99" value="50"></label><button class="btn">Add staff member</button></form></div>${S.staff.length ? `<div class="tw" style="margin-top:12px"><table><tbody>${S.staff.map((m) => `<tr><td>${av(m.discordId)}</td><td>${esc(m.name || m.discordId)}</td><td>${esc(m.role)}</td><td><button class="btn g s" data-ds="${esc(m.id)}">Remove</button></td></tr>`).join("")}</tbody></table></div>` : ""}`;
+      }
+      const today = () => new Date().toISOString().slice(0, 10);
+      const guard = () => {
+        const n = Date.now();
+        S.hits = (S.hits || []).filter((t) => n - t < 60000);
+        if (S.hits.length >= 12) {
+          toast("Rate limit: slow down a moment");
+          return false;
+        }
+        S.hits.push(n);
+        return true;
+      };
+      const run = async (fn) => {
+        if (!guard()) return;
+        try {
+          await fn();
+        } catch (e) {
+          toast("Error: " + (e.message || e));
+        }
+      };
+      function bind(r) {
+        const on = (s, ev, fn) => {
+          const e = $(s);
+          if (e) e[ev] = fn;
+        };
+        on("#uq", "oninput", (e) => {
+          S.uf.q = e.target.value;
+          render();
+          $("#uq").focus();
+          $("#uq").setSelectionRange(99, 99);
+        });
+        on("#uc", "onchange", (e) => {
+          S.uf.cat = e.target.value;
+          render();
+        });
+        on("#q", "oninput", (e) => {
+          S.f.q = e.target.value;
+          S.page = 1;
+          render();
+          const i = $("#q");
+          i.focus();
+          i.setSelectionRange(99, 99);
+        });
+        on("#ft", "onchange", (e) => {
+          S.f.type = e.target.value;
+          S.page = 1;
+          render();
+        });
+        on("#fs", "onchange", (e) => {
+          S.f.st = e.target.value;
+          S.page = 1;
+          render();
+        });
+        on("#so", "onchange", (e) => {
+          S.f.sort = e.target.value;
+          render();
+        });
+        on("#pp", "onclick", () => {
+          S.page--;
+          render();
+          scrollTo(0, 0);
+        });
+        on("#pn", "onclick", () => {
+          S.page++;
+          render();
+          scrollTo(0, 0);
+        });
+        on("#rg", "onchange", (e) => {
+          S.range = +e.target.value;
+          render();
+        });
+        on("#ap", "onsubmit", (ev) => {
+          ev.preventDefault();
+          const f = new FormData(ev.target);
+          location.href =
+            "mailto:support@example.com?subject=" +
+            encodeURIComponent("Appeal: " + f.get("lid")) +
+            "&body=" +
+            encodeURIComponent(f.get("msg"));
+        });
+        if (r.p === "log")
+          document.querySelectorAll("[data-appeal]").forEach((a) => (a.onclick = () => {}));
+        on("#lc", "onclick", () => {
+          S.edit = null;
+          render();
+        });
+        on("#uc2", "onclick", () => {
+          S.editU = null;
+          render();
+        });
+        on("#lf", "onsubmit", (ev) => {
+          ev.preventDefault();
+          const f = Object.fromEntries(new FormData(ev.target));
+          const ev2 = (f.evidence || "").split(/\s+/).filter(Boolean);
+          if (ev2.some((u) => !/^https:\/\/[^\s<>"]+$/.test(u)))
+            return toast("Evidence links must start with https://");
+          run(async () => {
+            const id = S.edit || "LOG-" + Date.now().toString(36).toUpperCase(),
+              old = S.logs.find((l) => l.id === id),
+              n = f.notes;
+            delete f.notes;
+            const rec = {
+              ...f,
+              id,
+              created: old?.created || today(),
+              updated: today(),
+              createdBy: old?.createdBy || S.uid || "admin",
+              modifiedBy: S.uid || "admin",
+            };
+            await S.db.collection("logs").doc(id).set(rec);
+            await S.db
+              .collection("notes")
+              .doc(id)
+              .set({ text: n || "" });
+            S.edit = null;
+            toast("Saved");
+          });
+        });
+        on("#uf", "onsubmit", (ev) => {
+          ev.preventDefault();
+          const f = Object.fromEntries(new FormData(ev.target));
+          run(async () => {
+            const k = S.editU || "u" + Date.now(),
+              old = S.upd.find((x) => x._k === k);
+            await S.db
+              .collection("updates")
+              .doc(k)
+              .set({
+                ...f,
+                id: k,
+                date: old?.date || today(),
+                author: old?.author || "Staff",
+                modifiedBy: S.uid || "admin",
+              });
+            S.editU = null;
+            toast("Published");
+          });
+        });
+        document.querySelectorAll("[data-e]").forEach(
+          (b) =>
+            (b.onclick = () => {
+              S.edit = b.dataset.e;
+              render();
+              scrollTo(0, 0);
+            }),
+        );
+        document.querySelectorAll("[data-eu]").forEach(
+          (b) =>
+            (b.onclick = () => {
+              S.editU = b.dataset.eu;
+              render();
+              scrollTo(0, 0);
+            }),
+        );
+        document.querySelectorAll("[data-d]").forEach(
+          (b) =>
+            (b.onclick = () => {
+              if (confirm("Delete log " + b.dataset.d + "? This cannot be undone."))
+                run(async () => {
+                  await S.db.collection("logs").doc(b.dataset.d).delete();
+                  await S.db.collection("notes").doc(b.dataset.d).delete();
+                  toast("Deleted");
+                });
+            }),
+        );
+        on("#sf", "onsubmit", (ev) => {
+          ev.preventDefault();
+          const f = Object.fromEntries(new FormData(ev.target));
+          run(async () => {
+            await S.db
+              .collection("staff")
+              .doc("s" + Date.now())
+              .set(f);
+            ev.target.reset();
+            toast("Staff member added");
+          });
+        });
+        document.querySelectorAll("[data-ds]").forEach(
+          (b) =>
+            (b.onclick = () => {
+              if (confirm("Remove this staff member?"))
+                run(async () => {
+                  await S.db.collection("staff").doc(b.dataset.ds).delete();
+                  toast("Removed");
+                });
+            }),
+        );
+        document.querySelectorAll("[data-du]").forEach(
+          (b) =>
+            (b.onclick = () => {
+              if (confirm("Delete this update?"))
+                run(async () => {
+                  await S.db.collection("updates").doc(b.dataset.du).delete();
+                  toast("Deleted");
+                });
+            }),
+        );
+      }
+      init();
+    </script>
+  </body>
+</html>
